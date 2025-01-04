@@ -1,7 +1,7 @@
 from aiogram import Router, F
 from aiogram.filters import Command, CommandStart
 from aiogram.filters.callback_data import CallbackData
-from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, URLInputFile
 ##from lexicon.lexicon import LEXICON_RU
 from aiogram.types import (KeyboardButton, Message, ReplyKeyboardMarkup,
                            ReplyKeyboardRemove, CallbackQuery)
@@ -26,7 +26,12 @@ number = 0
 # Этот хэндлер срабатывает на команду /start
 @router.message(CommandStart())
 async def process_start_command(message: Message):
+    image = URLInputFile(
+        "https://avatars.dzeninfra.ru/get-zen_brief/6488213/pub_62d159f2ebe438762b152033_62d159f2ebe438762b152034/scale_1200",
+        filename="python-logo.png"
+    )
     new_user(message.from_user.id)
+    await message.answer_photo(image)
     await message.answer(text='ЕБАННЫЙ РОТ ПОГНАЛИ НАХУЙ', reply_markup=keyboard)
 
 
