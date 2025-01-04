@@ -68,14 +68,14 @@ class MyCallbackFactory(CallbackData, prefix='any'):
 @router.message(F.text == 'Get all questions')
 async def get_all(message: Message):
     def create_kb(**kwargs):
-        width = len(kwargs)
+        #width = len(kwargs)
         kb_builder = InlineKeyboardBuilder()
         buttons = []
         for k, v in kwargs.items():
             buttons.append(InlineKeyboardButton(
                 text=f'{k}: {v}',
                 callback_data=MyCallbackFactory(key=k).pack()))
-        kb_builder.row(*buttons)
+        kb_builder.row(*buttons, width=1)
         return kb_builder.as_markup()
     questions = create_kb(**lexicon)
 
